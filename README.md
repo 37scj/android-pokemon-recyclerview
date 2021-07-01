@@ -4,7 +4,7 @@ Pokemon api v2 using recycler view list
 
 ### this app depends on:
 - kotlin
-- recyblerview
+- recyclerview
 - lottie
 - retrofit2
 - stetho

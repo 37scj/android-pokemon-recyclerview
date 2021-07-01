@@ -1,2 +1,2 @@
-rootProject.name='PokemonWSTemplate'
+rootProject.name='Pokemon'
 include ':app'

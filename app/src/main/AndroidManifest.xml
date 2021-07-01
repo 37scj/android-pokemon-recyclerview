@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.heiderlopes.pokemonwstemplate">
+    package="br.com.lucasgabriel.pokemon">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/FullScreen">
+
         <activity android:name=".view.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,10 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.scan.ScanActivity" />
         <activity android:name=".view.list.ListPokemonsActivity" />
         <activity android:name=".view.form.FormPokemonActivity" />
-        <activity android:name=".view.detail.DetailActivity" />
+        <activity android:name=".view.about.AboutActivity"></activity>
         <activity android:name=".view.main.MainActivity" />
     </application>
 

@@ -32,30 +32,30 @@ class FormPokemonActivity : AppCompatActivity() {
         })
 
         btSaveForm.setOnClickListener {
-            pokemon.ataque = sbAttack.progress
-            pokemon.defesa = sbDefense.progress
-            pokemon.velocidade = sbVelocity.progress
-            pokemon.ps = sbPS.progress
+//            pokemon.ataque = sbAttack.progress
+//            pokemon.defesa = sbDefense.progress
+//            pokemon.velocidade = sbVelocity.progress
+//            pokemon.ps = sbPS.progress
 
             formPokemonViewModel.updatePokemon(pokemon)
         }
     }
 
     private fun setValues() {
-        pokemon = intent.getParcelableExtra<Pokemon>("POKEMON")
+        this.pokemon = intent.getParcelableExtra<Pokemon>("POKEMON")
         tvPokemonNameForm.text = pokemon.nome
 
-        picasso.load("https://pokedexdx.herokuapp.com${pokemon.urlImagem}").into(ivPokemonForm)
+        picasso.load(pokemon.url_imagem_front).into(ivPokemonForm)
 
-        sbAttack.progress = pokemon.ataque
-        sbDefense.progress = pokemon.defesa
-        sbPS.progress = pokemon.ps
-        sbVelocity.progress = pokemon.velocidade
+//        sbAttack.progress = pokemon.ataque
+//        sbDefense.progress = pokemon.defesa
+//        sbPS.progress = pokemon.ps
+//        sbVelocity.progress = pokemon.velocidade
 
-        tvAttackValue.text = pokemon.ataque.toString()
-        tvDefenseValue.text = pokemon.defesa.toString()
-        tvPSValue.text = pokemon.ps.toString()
-        tvVelocityValue.text = pokemon.velocidade.toString()
+//        tvAttackValue.text = pokemon.ataque.toString()
+//        tvDefenseValue.text = pokemon.defesa.toString()
+//        tvPSValue.text = pokemon.ps.toString()
+//        tvVelocityValue.text = pokemon.velocidade.toString()
 
         setListener(sbAttack, tvAttackValue)
         setListener(sbDefense, tvDefenseValue)

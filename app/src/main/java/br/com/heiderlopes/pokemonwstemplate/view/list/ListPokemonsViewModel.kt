@@ -13,8 +13,8 @@ class ListPokemonsViewModel (val pokemonRepository: PokemonRepository) : ViewMod
 
     fun getPokemons() {
         isLoading.value = true
-        pokemonRepository.getPokemons(
-            150, "number,asc", {
+        pokemonRepository.getPokemonList(
+            0, 150, {
                 pokemons.value = it
                 messageError.value = ""
                 isLoading.value = false

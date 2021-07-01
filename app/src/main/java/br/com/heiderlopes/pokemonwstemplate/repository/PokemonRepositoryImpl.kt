@@ -7,8 +7,11 @@ import br.com.heiderlopes.pokemonwstemplate.model.PokemonResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.logging.Logger
 
 class PokemonRepositoryImpl(val pokemonService: PokemonService) : PokemonRepository {
+
+    private var log = Logger.getLogger("PokemonRepositoryImpl")
 
     override fun checkHealth(onComplete: () -> Unit, onError: (Throwable?) -> Unit) {
         pokemonService
@@ -31,14 +34,14 @@ class PokemonRepositoryImpl(val pokemonService: PokemonService) : PokemonReposit
             })
     }
 
-    override fun getPokemons(
-        size: Int,
-        sort: String,
+    override fun getPokemonList(
+        offset: Int,
+        limit: Int,
         onComplete: (List<Pokemon>?) -> Unit,
         onError: (Throwable?) -> Unit
     ) {
-        pokemonService.getPokemons(size, sort)
-            .enqueue(object: Callback<PokemonResponse>{
+        pokemonService.getPokemons(offset, limit)
+            .enqueue(object : Callback<PokemonResponse> {
                 override fun onFailure(call: Call<PokemonResponse>, t: Throwable) {
                     onError(t)
                 }
@@ -47,8 +50,14 @@ class PokemonRepositoryImpl(val pokemonService: PokemonService) : PokemonReposit
                     call: Call<PokemonResponse>,
                     response: Response<PokemonResponse>
                 ) {
-                    if(response.isSuccessful){
-                        onComplete(response.body()?.conteudo)
+                    if (response.isSuccessful) {
+                        val list = response.body()?.conteudo
+                        list?.forEach {
+                            it.id = it.url.split("/").filterNot { it.isNullOrBlank() }.last()
+                            it.url_imagem_front = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${it.id}.png"
+                            it.url_imagem_back = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${it.id}.png"
+                        }
+                        onComplete(list)
                     } else {
                         onError(Throwable("Erro ao recuperar os Pokemons"))
                     }
@@ -56,15 +65,23 @@ class PokemonRepositoryImpl(val pokemonService: PokemonService) : PokemonReposit
             })
     }
 
-    override fun updatePokemon(pokemon: Pokemon, onComplete: (Pokemon?) -> Unit, onError: (Throwable) -> Unit) {
+    override fun updatePokemon(
+        pokemon: Pokemon,
+        onComplete: (Pokemon?) -> Unit,
+        onError: (Throwable) -> Unit
+    ) {
         pokemonService
             .updatePokemon(pokemon)
-            .enqueue(object : Callback<Pokemon>{
+            .enqueue(object : Callback<Pokemon> {
                 override fun onFailure(call: Call<Pokemon>, t: Throwable) {
                     onError(t)
                 }
-                override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
-                    if(response.isSuccessful) {
+
+                override fun onResponse(
+                    call: Call<Pokemon>,
+                    response: Response<Pokemon>
+                ) {
+                    if (response.isSuccessful) {
                         onComplete(response.body())
                     } else {
                         onError(Throwable("Não foi possível atualizar o Pokémon"))

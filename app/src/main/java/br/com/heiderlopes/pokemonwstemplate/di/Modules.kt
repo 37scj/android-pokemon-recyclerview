@@ -5,7 +5,6 @@ import br.com.heiderlopes.pokemonwstemplate.api.AuthInterceptor
 import br.com.heiderlopes.pokemonwstemplate.api.PokemonService
 import br.com.heiderlopes.pokemonwstemplate.repository.PokemonRepository
 import br.com.heiderlopes.pokemonwstemplate.repository.PokemonRepositoryImpl
-import br.com.heiderlopes.pokemonwstemplate.view.form.FormPokemonViewModel
 import br.com.heiderlopes.pokemonwstemplate.view.list.ListPokemonsViewModel
 import br.com.heiderlopes.pokemonwstemplate.view.splash.SplashViewModel
 import com.facebook.stetho.okhttp3.StethoInterceptor
@@ -23,8 +22,6 @@ val viewModelModule = module {
     viewModel { SplashViewModel(get()) }
 
     viewModel { ListPokemonsViewModel(get()) }
-
-    viewModel { FormPokemonViewModel(get()) }
 
 }
 
@@ -50,7 +47,7 @@ private fun createPicassoAuth(context: Context, okHttpClient: OkHttpClient): Pic
 private fun createNetworkClient(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
         .client(okHttpClient)
-        .baseUrl("https://pokedexdx.herokuapp.com")
+        .baseUrl("https://pokeapi.co/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 }

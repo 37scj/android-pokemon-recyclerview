@@ -39,12 +39,11 @@ class ListPokemonsAdapter(
             clickListener: (Pokemon) -> Unit
         ) = with(itemView) {
             tvPokemonName.text = pokemon.nome
-            tvPokemonNumber.text = pokemon.numero
+            tvPokemonNumber.text = pokemon.id;
             picasso
-                .load("https://pokedexdx.herokuapp.com${pokemon.urlImagem}")
+                .load(pokemon.url_imagem_front)
                 .placeholder(R.drawable.charizard)
                 .into(ivPokemon)
-
             setOnClickListener { clickListener(pokemon) }
         }
     }

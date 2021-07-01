@@ -6,8 +6,13 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import br.com.heiderlopes.pokemonwstemplate.R
+import br.com.heiderlopes.pokemonwstemplate.api.PokemonService
+import br.com.heiderlopes.pokemonwstemplate.repository.PokemonRepository
+import br.com.heiderlopes.pokemonwstemplate.repository.PokemonRepositoryImpl
 import br.com.heiderlopes.pokemonwstemplate.view.main.MainActivity
 import org.koin.android.viewmodel.ext.android.viewModel
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class SplashActivity : AppCompatActivity() {
 
@@ -20,7 +25,7 @@ class SplashActivity : AppCompatActivity() {
         splashViewModel.checkHealth()
 
         splashViewModel.messageError.observe(this, Observer {
-            if (it == "") {
+            if (it.isNullOrEmpty()) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {

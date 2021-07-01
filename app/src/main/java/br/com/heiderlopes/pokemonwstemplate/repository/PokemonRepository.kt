@@ -8,9 +8,9 @@ interface PokemonRepository {
         onError: (Throwable?) -> Unit
     )
 
-    fun getPokemons(
-        size: Int,
-        sort: String,
+    fun getPokemonList(
+        offset: Int,
+        limit: Int,
         onComplete: (List<Pokemon>?) -> Unit,
         onError: (Throwable?) -> Unit
     )

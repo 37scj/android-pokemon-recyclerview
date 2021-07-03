@@ -40,8 +40,8 @@ class ListPokemonsActivity : AppCompatActivity() {
         })
         listaPokemonsViewModel.pokemons.observe(this, Observer {
             rvPokemons.adapter = ListPokemonsAdapter(it, picasso) {
-                // val intent = Intent(this, FormPokemonActivity::class.java)
-                // intent.putExtra("POKEMON", it)
+                val intent = Intent(this, FormPokemonActivity::class.java)
+                intent.putExtra("POKEMON", it)
                 // startActivity(intent)
                 //finish()
             }

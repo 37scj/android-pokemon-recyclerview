@@ -24,3 +24,7 @@ RM 337432 - Lucas Rodrigues
 
 RM 337956 - Gabriel Lucas de Toledo Ribeiro
 
+# Watch the video
+
+link : https://www.youtube.com/watch?v=NsGHOgz0v9U
+
